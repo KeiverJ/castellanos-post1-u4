@@ -1,0 +1,474 @@
+/* ============================================================
+   GALERÍA INTERACTIVA — Estética: Editorial Neón / Dark Lab
+   Fuentes: Syne (títulos) + DM Sans (cuerpo)
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap");
+
+/* ─── Variables ─── */
+:root {
+  --bg: #0a0b0f;
+  --surface: #111318;
+  --surface-2: #1a1d26;
+  --border: #ffffff12;
+  --text: #e8eaf0;
+  --muted: #6b7185;
+  --accent-tec: #00f0ff; /* cyan   – tecnología */
+  --accent-cie: #a855f7; /* violeta – ciencia   */
+  --accent-art: #f97316; /* naranja – arte       */
+  --radius: 14px;
+  --font-head: "Syne", sans-serif;
+  --font-body: "DM Sans", sans-serif;
+}
+
+/* ─── Reset + Base ─── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  /* Grain overlay */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ─── Header ─── */
+header {
+  position: relative;
+  padding: 3.5rem 2rem 2.5rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 70% 120% at 50% 0%,
+    #00f0ff18 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+header h1 {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  background: linear-gradient(
+    135deg,
+    var(--accent-tec) 0%,
+    #ffffff 55%,
+    var(--accent-cie) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeSlideDown 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ─── Controles / Formulario ─── */
+#controles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 1.5rem 2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin: 0 2rem 1.5rem;
+  animation: fadeSlideDown 0.7s 0.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  position: relative;
+  overflow: hidden;
+}
+
+#controles::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--accent-tec),
+    var(--accent-cie),
+    var(--accent-art)
+  );
+}
+
+#controles input,
+#controles select {
+  flex: 1 1 180px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 0.65rem 1rem;
+  outline: none;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+#controles input::placeholder {
+  color: var(--muted);
+}
+
+#controles input:focus,
+#controles select:focus {
+  border-color: var(--accent-tec);
+  box-shadow: 0 0 0 3px #00f0ff18;
+}
+
+#controles select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7185' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+#controles select option {
+  background: var(--surface-2);
+}
+
+#btn-agregar {
+  flex: 0 0 auto;
+  padding: 0.65rem 1.5rem;
+  background: var(--accent-tec);
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-head);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.15s,
+    box-shadow 0.2s;
+}
+
+#btn-agregar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: white;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+#btn-agregar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px #00f0ff40;
+}
+#btn-agregar:hover::after {
+  opacity: 0.1;
+}
+#btn-agregar:active {
+  transform: translateY(0);
+}
+
+/* ─── Filtros ─── */
+#filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0 2rem 1.5rem;
+  animation: fadeSlideDown 0.7s 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.btn-filtro {
+  padding: 0.45rem 1.1rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-filtro:hover {
+  border-color: var(--text);
+  color: var(--text);
+}
+
+.btn-filtro.activo[data-categoria="todas"] {
+  background: #ffffff15;
+  border-color: #fff5;
+  color: #fff;
+}
+.btn-filtro.activo[data-categoria="tecnologia"] {
+  background: #00f0ff18;
+  border-color: var(--accent-tec);
+  color: var(--accent-tec);
+}
+.btn-filtro.activo[data-categoria="ciencia"] {
+  background: #a855f720;
+  border-color: var(--accent-cie);
+  color: var(--accent-cie);
+}
+.btn-filtro.activo[data-categoria="arte"] {
+  background: #f9731620;
+  border-color: var(--accent-art);
+  color: var(--accent-art);
+}
+
+/* ─── Contador ─── */
+#contador {
+  padding: 0 2rem 0.75rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ─── Galería ─── */
+#galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+  padding: 0 2rem 4rem;
+  animation: fadeSlideDown 0.7s 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ─── Tarjeta ─── */
+.tarjeta {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition:
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s;
+  animation: cardIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Línea de color lateral según categoría */
+.tarjeta::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  border-radius: 999px;
+  transition: height 0.3s;
+}
+
+.tarjeta.categoria-tecnologia::before {
+  background: var(--accent-tec);
+  box-shadow: 0 0 12px var(--accent-tec);
+}
+.tarjeta.categoria-ciencia::before {
+  background: var(--accent-cie);
+  box-shadow: 0 0 12px var(--accent-cie);
+}
+.tarjeta.categoria-arte::before {
+  background: var(--accent-art);
+  box-shadow: 0 0 12px var(--accent-art);
+}
+
+/* Brillo de fondo en hover */
+.tarjeta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.tarjeta.categoria-tecnologia::after {
+  background: radial-gradient(circle at 20% 50%, #00f0ff08 0%, transparent 60%);
+}
+.tarjeta.categoria-ciencia::after {
+  background: radial-gradient(circle at 20% 50%, #a855f708 0%, transparent 60%);
+}
+.tarjeta.categoria-arte::after {
+  background: radial-gradient(circle at 20% 50%, #f9731608 0%, transparent 60%);
+}
+
+.tarjeta:hover {
+  transform: translateY(-4px);
+}
+.tarjeta:hover::after {
+  opacity: 1;
+}
+
+.tarjeta.categoria-tecnologia:hover {
+  box-shadow:
+    0 12px 40px #00f0ff18,
+    0 0 0 1px #00f0ff30;
+}
+.tarjeta.categoria-ciencia:hover {
+  box-shadow:
+    0 12px 40px #a855f718,
+    0 0 0 1px #a855f730;
+}
+.tarjeta.categoria-arte:hover {
+  box-shadow:
+    0 12px 40px #f9731618,
+    0 0 0 1px #f9731630;
+}
+
+/* ─── Badge ─── */
+.badge {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-family: var(--font-head);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-left: 0.75rem; /* espacio para la línea lateral */
+}
+
+.categoria-tecnologia .badge {
+  background: #00f0ff18;
+  color: var(--accent-tec);
+  border: 1px solid #00f0ff30;
+}
+.categoria-ciencia .badge {
+  background: #a855f718;
+  color: var(--accent-cie);
+  border: 1px solid #a855f730;
+}
+.categoria-arte .badge {
+  background: #f9731618;
+  color: var(--accent-art);
+  border: 1px solid #f9731630;
+}
+
+/* ─── Título y descripción ─── */
+.tarjeta h3 {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.3;
+  padding-left: 0.75rem;
+  color: var(--text);
+}
+
+.tarjeta p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--muted);
+  padding-left: 0.75rem;
+  flex: 1;
+}
+
+/* ─── Botón Eliminar ─── */
+.btn-eliminar {
+  align-self: flex-end;
+  margin-top: 0.25rem;
+  padding: 0.4rem 0.9rem;
+  background: transparent;
+  border: 1px solid #ff304020;
+  color: #ff6060;
+  border-radius: 7px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.btn-eliminar:hover {
+  background: #ff304018;
+  border-color: #ff3040;
+  color: #ff4455;
+}
+
+/* ─── Tarjeta oculta (filtro) ─── */
+.tarjeta.oculta {
+  display: none;
+}
+
+/* ─── Mensaje vacío ─── */
+.mensaje-vacio {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--muted);
+  font-size: 1rem;
+  padding: 4rem 2rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  font-style: italic;
+}
+
+/* ─── Animaciones ─── */
+@keyframes fadeSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 600px) {
+  #controles,
+  #filtros,
+  #galeria,
+  #contador {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  #controles {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  #btn-agregar {
+    width: 100%;
+    justify-content: center;
+  }
+}
